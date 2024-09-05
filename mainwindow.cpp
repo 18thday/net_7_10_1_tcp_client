@@ -31,12 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     });
 
-
-
- /*
-  * Соединяем сигналы со слотами
- */
-
+    // CONNECT
     connect(client, &TCPclient::sig_connectStatus, this, &MainWindow::DisplayConnectStatus);
     connect(client, &TCPclient::sig_sendTime, this, &MainWindow::DisplayTime);
     connect(client, &TCPclient::sig_sendFreeSize, this, &MainWindow::DisplayFreeSpace);
@@ -60,14 +55,17 @@ void MainWindow::DisplayTime(QDateTime dt)
     ui->tb_result->append("Дата: " + dt.date().toString("dd.MM.yyyy") + "; "
                           "Время: " + dt.time().toString());
 }
+
 void MainWindow::DisplayFreeSpace(uint32_t free_space)
 {
     ui->tb_result->append("Свободное место на серере: " + QString::number(free_space));
 }
+
 void MainWindow::SetDataReply(QString replyString)
 {
     ui->tb_result->append("Отправлено на сервер: " + replyString);
 }
+
 void MainWindow::DisplayStat(StatServer stat)
 {
     ui->tb_result->append("Статистика сервера:");
